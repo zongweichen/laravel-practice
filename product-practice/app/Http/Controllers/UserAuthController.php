@@ -20,4 +20,13 @@ class UserAuthController extends Controller
 
         return view("auth.signup", $binding);
     }
+
+    public function SignUpProcess()
+    {
+        $input = request()->all();
+
+        if ($input["nickname"] == "" ) {
+            return redirect("/user/auth/signup")->withErrors("暱稱不得為空");
+        }
+    }
 }
