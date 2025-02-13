@@ -11,7 +11,7 @@ class UserAuthController extends Controller
         return(111);
     }
 
-    public function SignUp()
+    public function SignUpPage()
     {
         $binding = [
             "title" => "註冊",
