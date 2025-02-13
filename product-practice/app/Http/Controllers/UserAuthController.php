@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Hash;
 use App\Shop\Entity\User;
+use Illuminate\Support\Facades\Mail;
 
 class UserAuthController extends Controller
 {
@@ -43,7 +44,10 @@ class UserAuthController extends Controller
         else {
             $input["password"] = Hash::make($input["password"]);
             User::create($input);
-            print_r($input);
+            Mail::send('email.signUpEmailNotification', ['nickname' => $input['nickname']], function($message) use ($input) {
+                $message->to($input['email'], $input['nickname'])->from('jay879944@gmail.com')->subject('恭喜註冊成功');
+            });
+    
         }
         
     }
