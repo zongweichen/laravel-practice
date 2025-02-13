@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Hash;
+use App\Shop\Entity\User;
 
 class UserAuthController extends Controller
 {
@@ -36,6 +37,7 @@ class UserAuthController extends Controller
             ->withInput();
         } else {
             $input["password"] = Hash::make($input["password"]);
+            User::create($input);
             print_r($input);
         }
         
