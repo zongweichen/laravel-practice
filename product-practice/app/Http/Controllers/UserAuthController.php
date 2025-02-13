@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Hash;
 
 class UserAuthController extends Controller
 {
@@ -26,7 +27,17 @@ class UserAuthController extends Controller
         $input = request()->all();
 
         if ($input["nickname"] == "" ) {
-            return redirect("/user/auth/signup")->withErrors("暱稱不得為空");
+            return redirect("/user/auth/signup")
+            ->withErrors("暱稱不得為空")
+            ->withInput();
+        } elseif ($input["password"] == "") {
+            return redirect("/user/auth/signup")
+            ->withErrors("密碼不得為空")
+            ->withInput();
+        } else {
+            $input["password"] = Hash::make($input["password"]);
+            print_r($input);
         }
+        
     }
 }
