@@ -75,6 +75,7 @@ class UserAuthController extends Controller
             ->withInput();
         } else {
             if(Hash::check($input["password"], $tempuser->password)){ //$tempuser["password"]
+                session()->put("user_id", $tempuser->id);
                 return redirect("/user/auth/signin")
                 ->withErrors("有此帳號")
                 ->withInput();
@@ -91,5 +92,11 @@ class UserAuthController extends Controller
 
 
 
+    }
+
+    public function SignOut()
+    {
+        session()->forget("user_id");
+        return redirect("/user/auth/signin");
     }
 }
