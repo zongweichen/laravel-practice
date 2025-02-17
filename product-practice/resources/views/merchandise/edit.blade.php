@@ -14,7 +14,7 @@
 <!-- @include('component.socialButton') -->
 
 @include("component.errors")
-<form action="" method="post">
+<form action="/merchandise/{{$merchandise -> id}}/edit" method="post">
     {{ csrf_field() }}
     <label>
         商品名稱：

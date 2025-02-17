@@ -27,5 +27,8 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(["prefix" => "merchandise"], function() {
     Route::get("create", "App\Http\Controllers\MerchandiseController@MerchandiseCreateProcess");
     Route::get("{merchandise_id}/edit", "App\Http\Controllers\MerchandiseController@MerchandiseItemEditPage");
+    Route::post("{merchandise_id}/edit", "App\Http\Controllers\MerchandiseController@MerchandiseItemUpdateProcess");
+    
+
 });
 
