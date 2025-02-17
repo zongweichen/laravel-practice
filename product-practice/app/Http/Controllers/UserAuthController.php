@@ -51,4 +51,45 @@ class UserAuthController extends Controller
         }
         
     }
+
+    public function SignInPage()
+    {
+        $binding = [
+            "title" => "登入",
+            "note" => "使用者登入頁面",
+        ];
+
+        return view("auth.signin", $binding);
+    }
+
+    public function SignInProcess()
+    {
+        $input = request()->all();
+        //登入邏輯
+        //取得參數
+        $tempuser = User::where("email", $input["email"])->first();
+        
+        if(is_null($tempuser)){
+            return redirect("/user/auth/signin")
+            ->withErrors("無此帳號")
+            ->withInput();
+        } else {
+            if(Hash::check($input["password"], $tempuser->password)){ //$tempuser["password"]
+                return redirect("/user/auth/signin")
+                ->withErrors("有此帳號")
+                ->withInput();
+            } else {
+                return redirect("/user/auth/signin")
+                ->withErrors("密碼錯誤")
+                ->withInput();
+            }
+        }
+
+        
+            
+
+
+
+
+    }
 }
